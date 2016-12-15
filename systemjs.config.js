@@ -24,6 +24,9 @@
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
 
       // other libraries
+      'semantic':                   'npm:semantic-ui/dist/semantic.min.js',
+      'jquery':                     'npm:jquery/dist/jquery.min.js',
+      'ng-semantic':                'npm:ng-semantic',
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
     },
@@ -34,6 +37,10 @@
         defaultExtension: 'js'
       },
       rxjs: {
+        defaultExtension: 'js'
+      },
+      'ng-semantic': {
+        main: 'ng-semantic',
         defaultExtension: 'js'
       }
     }
