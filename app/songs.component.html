@@ -1,14 +1,21 @@
 <h2>My Songs</h2>
-<ul class="heroes">
-  <li *ngFor="let song of songs" (click)="onSelect(song)" [class.selected]="song === selectedSong">
-    <span class="hero-element">
-      <span class="badge">{{song.id}}</span> {{song.name}}
-    </span>
-    <button class="delete-button" (click)="deleteSong(song, $event)">Delete</button>
-  </li>
-</ul>
+<div class="ui middle aligned selection divided list">
+  <div *ngFor="let song of songs | async" (click)="onSelect(song)" class="item" [class.active]="song === selectedSong">
+    <div class="ui middle aligned  content song-element">
+      <a [routerLink]="['/detail', song.id]"><span>{{song.id}}</span> {{song.name}}</a>
+      <div class="right floated content">
+        <button class="ui negative circular icon button mini" (click)="deleteSong(song, $event)"><i
+          class="remove icon"></i>
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+</div>
 
 <div class="error" *ngIf="error">{{error}}</div>
+
 <button (click)="addSong()">Add New song</button>
 <div *ngIf="addingSong">
   <my-song-detail (close)="close($event)"></my-song-detail>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import {Observable} from 'rxjs/Observable'
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { Song } from './song';
 import { SongService } from './song.service';
 
@@ -11,21 +12,14 @@ import { SongService } from './song.service';
   styleUrls: ['songs.component.css']
 })
 export class SongsComponent implements OnInit {
-  songs: Song[];
   selectedSong: Song;
   addingSong = false;
   error: any;
-
+  songs: Observable<any[]>;
   constructor(
     private router: Router,
     private songService: SongService) { }
 
-  getSongs(): void {
-    this.songService
-      .getSongs()
-      .then(songs => this.songs = songs)
-      .catch(error => this.error = error);
-  }
 
   addSong(): void {
     this.addingSong = true;
@@ -34,22 +28,25 @@ export class SongsComponent implements OnInit {
 
   close(savedSong: Song): void {
     this.addingSong = false;
-    if (savedSong) { this.getSongs(); }
+    // if (savedSong) { this.getSongs(); }
   }
 
   deleteSong(song: Song, event: any): void {
     event.stopPropagation();
-    this.songService
-      .delete(song)
-      .then(res => {
-        this.songs = this.songs.filter(s => s !== song);
-        if (this.selectedSong === song) { this.selectedSong = null; }
-      })
-      .catch(error => this.error = error);
+    // this.songService
+    //   .delete(song)
+    //   .then(res => {
+    //     this.songs = this.songs.filter(s => s !== song);
+    //     if (this.selectedSong === song) { this.selectedSong = null; }
+    //   })
+    //   .catch(error => this.error = error);
   }
 
   ngOnInit(): void {
-    this.getSongs();
+    this.songs = this.songService.items;
+    this.songService.loadAll();
+
+    console.info(this.songs);
   }
 
   onSelect(song: Song): void {

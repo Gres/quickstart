@@ -7,11 +7,12 @@ import {HttpModule} from '@angular/http';
 import {AppComponent}  from './app.component';
 import {AppRoutingModule, routedComponents} from './app-routing.module';
 import {SongService} from './song.service';
+import {AuthorService} from './author.service'
 @NgModule({
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule, NgSemanticModule ],
   declarations: [AppComponent, routedComponents],
   providers: [
-    SongService
+    SongService, AuthorService
   ],
   bootstrap: [AppComponent]
 

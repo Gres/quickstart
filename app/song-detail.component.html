@@ -1,11 +1,30 @@
-<div *ngIf="song">
+<form class="ui form" *ngIf="song">
   <h2>{{song.name}} details!</h2>
+
   <div>
-    <label>id: </label>{{song.id}}</div>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="song.name" placeholder="name" />
+    <label>id: </label>{{song.id}}
   </div>
-  <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
-</div>
+  <div class="field">
+    <label>Song name</label>
+    <input [(ngModel)]="song.name" type="text" name="song-name" placeholder="Song name">
+  </div>
+
+  <div class="field">
+    <label>Author</label>
+    <sm-select
+      [options]="{direction: 'upward', transition: 'vertical flip', allowAdditions: true}"
+      [(model)]="song.author"
+      (onChange)="test($event)"
+      class="fluid search multiple">
+      <option value="{{author.id}}" *ngFor="let author of authors | async">{{author.name}}</option>
+    </sm-select>
+  </div>
+
+  <div class="field">
+    <label>Text</label>
+    <textarea [(ngModel)]="song.text"  name="Text" placeholder="Text"></textarea>
+  </div>
+  <button class="ui button" (click)="goBack()">Back</button>
+  <button class="ui button" type="submit" (click)="save()">Save</button>
+</form>
+

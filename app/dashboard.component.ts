@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import {Observable} from 'rxjs/Observable'
 import { Song } from './song';
 import { SongService } from './song.service';
 
@@ -11,7 +11,7 @@ import { SongService } from './song.service';
   styleUrls: ['dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  songs: Song[] = [];
+  songs: Observable<any[]>;
 
   constructor(
     private router: Router,
@@ -19,10 +19,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.songService.getSongs()
-      .then(songs => {
-        this.songs = songs.slice(1, 5)
-      });
+    this.songs = this.songService.items;
+    this.songService.loadAll();
   }
 
   gotoDetail(song: Song): void {

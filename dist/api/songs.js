@@ -12,12 +12,14 @@ var _faker2 = _interopRequireDefault(_faker);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+_faker2.default.locale = "ru";
 function generateAuthors() {
   var authors = [];
-  for (var id = 0; id < 10; id++) {
+  for (var id = 0; id < 5; id++) {
     authors.push({
       "id": id,
-      "name": _faker2.default.internet.userName()
+      "name": _faker2.default.internet.userName(),
+      "avatar": _faker2.default.image.people(32, 32)
     });
   }
   return authors;
@@ -25,7 +27,7 @@ function generateAuthors() {
 
 function generateSongs() {
   var songs = [];
-  for (var id = 0; id < 50; id++) {
+  for (var id = 0; id < 10; id++) {
     songs.push({
       "id": id,
       "name": _faker2.default.lorem.words(),
